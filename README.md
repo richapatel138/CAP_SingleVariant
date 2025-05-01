@@ -99,7 +99,7 @@ git clone https://github.com/richapatel138/CAP_SingleVariant.git
 ```
 Move into the directory:
 ```
-cd CAP_SVA
+cd CAP_SingleVariant
 ```
 To run the pipeline with other data, first ensure that all paths in the config file is accurate. The syntax to run the single variant analysis is: 
 ```

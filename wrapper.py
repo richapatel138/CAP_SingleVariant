@@ -57,11 +57,12 @@ r_command.extend([
     "--outputdir", params['outputdir']
 ])
 
-# Print or log the full command (optional)
-print("Running command:\n", " ".join(r_command))
+# Create output log file path
+log_file_path = os.path.join(os.getcwd(), 'SVA.log')
 
-# Run the R script
-try:
-    subprocess.run(r_command, check=True)
-except subprocess.CalledProcessError as e:
-    print("Error running R script:", e)
+# Run the R script and log stdout/stderr
+with open(log_file_path, 'w') as log_file:
+    try:
+        subprocess.run(r_command, check=True, stdout=log_file, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        print(f"Error running R script. Check the log file at {log_file_path} for details.")

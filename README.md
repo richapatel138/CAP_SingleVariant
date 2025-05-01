@@ -5,7 +5,7 @@
 This pipeline provides an intuitive approach to colocalization, capable of processing ARIC-formatted pQTLs, GTEx-formatted eQTLs, and GWAS summary statistics. It tests for shared genetic signals between GWAS and QTL data by identifying overlapping causal variants, helping to pinpoint or features that are not only associated with a trait but also have their expression influenced by the same variants. Building on previous work, this pipeline allows users to input a list of genes and run colocalization analysis without modifying the script for each iteration.
 
 ### Data
-This pipeline is a modification of a pipeline created to generate colocalization for pQTL data in a paper published detailing a proteome association study of breast, prostate, ovarian, and endometrial cancers (Gregga et al. 2023). The intended use of this pipeline is to be a general-use pipeline to run colocalization analyses across an array of data inputs for both eQTL and pQTl data, as opposed to the hard-coded inputs used in the study. The data provided for testing is a truncated version of the data used in the aforementioned study. 
+This pipeline is a modification of a pipeline created to generate colocalization for pQTL data in a paper published detailing a proteome association study of breast, prostate, ovarian, and endometrial cancers (Gregga et al. 2023). The GWAS data provided for testing is a truncated version of the data used in the aforementioned study. The QTL data comes from [ARIC](https://predictdb.org/categories/downloads/) for and [GTEX](https://www.gtexportal.org/home/).
 
 ### CAP Workflow
 
@@ -33,7 +33,6 @@ The following R packages are automatically installed (if not already present) an
 
 #### Input Specifications
 As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs and GWAS summary statistics to perform colocalization. Due to the lack of a consensus in the format of GWAS, eQTL, and pQTL data, we ask that the following information be included. For ease of use, please enter it in the [`config.ini`](#the-configini-file) file:
-
 ##### The `config.ini` File
 - `process`: Indicates the type of QTL data being used. Acceptable values are typically:
   - `eqtl`: expression Quantitative Trait Loci, denote in config file with "eqtl"
@@ -52,7 +51,7 @@ As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs
 - `ID_input`: The column name containing SNP IDs or variant identifiers (e.g., `"rsid"`). Only needed if using eQTL data.
 - `outputdir`: Name of directory where all output files (plots, results tables, logs) will be written. This will be generated for you.
 
-This pipeline runs two colocalization procedures with the `coloc` package in `R`, the first being the assumption of 0 or 1 causal variant in each trait (single variant assumption), and the other is the understanding that multiple causal variants can be involved in the shared genetic influence between two traits (multiple variant assumption). The former is a trivial task, but the latter requires linkage disequilibrium data (represented as a correlation matrix between SNP's) to help cluster tightly linked variants and decrease artificially inflated false positive rates. 
+The current functionality of the pipeline runs colocalization procedures with the `coloc` package in `R`,  first being the assumption of 0 or 1 causal variant in each trait (single variant assumption). 
 
 The linkage disequilibrium data is generated from data obtained from phase 3 of the 1000 genomes project, a project aimed to map the majority of human genetic variation. The data that is required for this pipeline is extremely large, and we highly recommend that upon downloading the user keeps the data in a safe place for reuse. This pipeline has the added capability of downloading the required data built-in. The pipeline can also accommodate already downloaded and processed data skipping corresponding steps, streamlining the process for future iterations of the pipeline's usage. 
 

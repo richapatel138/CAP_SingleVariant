@@ -17,10 +17,10 @@ Gregga I, Pharoah PDP, Gayther SA, Manichaikul A, Im HK, Kar SP, Schildkraut JM,
 
 ### Packages & Dependencies
 This pipeline is designed for a Unix environment, and requires the following software to function:
-* [Linux/Unix](https://www.linux.org/pages/download/)
-  * [libmariadbclient-dev](https://github.com/r-dbi/RMySQL)
-* [Python3](https://www.python.org/downloads/)
-* [R](https://www.r-project.org/)  
+* [`Linux/Unix`](https://www.linux.org/pages/download/)
+  * [`libmariadbclient-dev`](https://github.com/r-dbi/RMySQL)
+* [`Python3`](https://www.python.org/downloads/)
+* [`R`](https://www.r-project.org/)  
 
 The following R packages are automatically installed (if not already present) and loaded silently by the pipeline. However, if any issues arise, please use the following links to troubleshoot. 
 - [`data.table`](https://cran.r-project.org/web/packages/data.table/index.html)

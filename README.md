@@ -104,7 +104,7 @@ In order to select regions of interest, the pipeline requires a list of genes to
 	* `gene_locuscompare.png`: Visualization of locus comparison results between datasets.
  * A `SVA.log` file is also generated in the working direcotry to capture all terminal output and error messages from the run.
 
-### Command Arguments
+### Command to Run the Pipeline
 To run the script, please clone the repository:
 ```
 git clone https://github.com/richapatel138/CAP_SingleVariant.git

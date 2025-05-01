@@ -95,7 +95,7 @@ In order to select regions of interest, the pipeline requires a list of genes to
 ### Command Arguments
 To run the script, please clone the repository:
 ```
-git clone https://github.com/richapatel138/CAP_SVA.git
+git clone https://github.com/richapatel138/CAP_SingleVariant.git
 ```
 Move into the directory:
 ```

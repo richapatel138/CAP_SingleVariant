@@ -11,7 +11,9 @@ This pipeline is a modification of a pipeline created to generate colocalization
 Gregga I, Pharoah PDP, Gayther SA, Manichaikul A, Im HK, Kar SP, Schildkraut JM, Wheeler HE. Predicted Proteome Association Studies of Breast, Prostate, Ovarian, and Endometrial Cancers Implicate Plasma Protein Regulation in Cancer Susceptibility. Cancer Epidemiol Biomarkers Prev. 2023 Sep 1;32(9):1198-1207. doi: 10.1158/1055-9965.EPI-23-0309. PMID: 37409955; PMCID: PMC10528410.
 
 ### Scripts 
-* `SVA.R`: 
+* `SVA.R`: R script that performs automated colocalization analysis between GWAS data and either eQTL or pQTL datasets. It processes input files, aligns SNPs, runs the coloc method, and generates visualizations using locuscomparer.
+* `wrapper.py`: Python script that acts as a wrapper to run the SVA.R script using parameters specified in a .ini config file, streamlining execution by dynamically building and executing the appropriate Rscript command based on user-defined settings.
+* `config.ini`: File that is a configuration file (in .ini format) used by the Python wrapper script to provide input parameters for running the SVA.R R script. `config_eqtl.ini` and `config_pqtl.ini` are already initialized for running test data.
 
 ### Packages & Dependencies
 This pipeline is designed for a Unix environment, and requires the following software to function:

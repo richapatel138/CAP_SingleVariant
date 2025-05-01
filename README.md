@@ -92,6 +92,18 @@ In order to select regions of interest, the pipeline requires a list of genes to
 #### Step 8: Final Output
 - Store all result files and plots in the gene-specific output directories.
 
+### Output Files
+* For each gene in the gene list, there will be a folder created for it in the specified output directory. Each folder will contain:
+	* `gene_gwascoloc`: coloc formatted GWAS dataset  
+	* `gene_qtlcoloc`: coloc formatted QTL dataset
+	* `gene_matchsnps`: Lists SNPs matched between datasets (e.g., GWAS and QTL) after filtering and cleaning
+	* `gene_sva_results.tsv`: Full results for coloc.abf() single variant analysis
+	* `gene_sva_summary.tsv`: Summary results for coloc.abf() single variant analysis
+	* `gene_gwas_locuscompare.txt`: GWAS file generated for locuscomapre using matchsnps dataset.
+	* `gene_qtl_locuscompare.txt`: QTL file generated for locuscomapre using matchsnps dataset.
+	* `gene_locuscompare.png`: Visualization of locus comparison results between datasets.
+ * A `SVA.log` file is also generated in the working direcotry to capture all terminal output and error messages from the run.
+
 ### Command Arguments
 To run the script, please clone the repository:
 ```

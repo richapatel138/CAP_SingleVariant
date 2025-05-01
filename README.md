@@ -12,7 +12,7 @@ This pipeline is a modification of a pipeline created to generate colocalization
 #### Dependencies
 This pipeline is designed for a Unix environment, and requires the following software to function:
 * [Linux/Unix](https://www.linux.org/pages/download/)
-* * [libmariadbclient-dev](https://github.com/r-dbi/RMySQL)
+  * [libmariadbclient-dev](https://github.com/r-dbi/RMySQL)
 * [Python3](https://www.python.org/downloads/)
 * [R](https://www.r-project.org/)  
 

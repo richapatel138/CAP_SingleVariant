@@ -27,6 +27,7 @@ suppressPackageStartupMessages(invisible(library(R.utils)))
 suppressPackageStartupMessages(invisible(library(ggplot2)))
 suppressPackageStartupMessages(invisible(library(httr)))
 suppressPackageStartupMessages(invisible(library(jsonlite)))
+suppressPackageStartupMessages(invisible(library(RMySQL)))
 suppressPackageStartupMessages(invisible(library(locuscomparer)))
 
 # Define a string concatenation operator

@@ -12,6 +12,7 @@ This pipeline is a modification of a pipeline created to generate colocalization
 #### Dependencies
 This pipeline is designed for a Unix environment, and requires the following software to function:
 * [Linux/Unix](https://www.linux.org/pages/download/)
+* * [libmariadbclient-dev](https://github.com/r-dbi/RMySQL)
 * [Python3](https://www.python.org/downloads/)
 * [R](https://www.r-project.org/)  
 
@@ -28,6 +29,7 @@ The following R packages are automatically installed (if not already present) an
 - [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html)
 - [`httr`](https://cran.r-project.org/web/packages/httr/index.html)
 - [`jsonlite`](https://cran.r-project.org/web/packages/jsonlite/index.html)
+- [`RMySQL`](https://cran.r-project.org/web/packages/RMySQL/index.html)
 - [`locuscomparer`](https://github.com/boxiangliu/locuscomparer)
 
 

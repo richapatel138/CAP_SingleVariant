@@ -8,6 +8,7 @@ if (!require(R.utils)) { install.packages("R.utils") }
 if (!require(ggplot2)) { install.packages("ggplot2") }
 if (!require(httr)) { install.packages("httr") }
 if (!require(jsonlite)) { install.packages("jsonlite") }
+if (!require(RMySQL)) { install.packages("RMySQL") }
 
 # Install and load 'locuscomparer' from GitHub if not already installed
 if (!require(locuscomparer)) {

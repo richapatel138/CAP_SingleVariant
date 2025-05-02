@@ -28,12 +28,14 @@ The following R packages are automatically installed (if not already present) an
 - [`coloc`](https://chr1swallace.github.io/coloc/)
 - [`hash`](https://cran.r-project.org/web/packages/hash/index.html)
 - [`optparse`](https://cran.r-project.org/web/packages/optparse/index.html)
-- [`R.utils`](https://cran.r-project.org/web/packages/R.utils/index.html)
+- [`R.utils`](https://cran.r-project.org/web/packages/R.utils/index.html) 
 - [`ggplot2`](https://cran.r-project.org/web/packages/ggplot2/index.html)
 - [`httr`](https://cran.r-project.org/web/packages/httr/index.html)
 - [`jsonlite`](https://cran.r-project.org/web/packages/jsonlite/index.html)
 - [`RMySQL`](https://cran.r-project.org/web/packages/RMySQL/index.html)
 - [`locuscomparer`](https://github.com/boxiangliu/locuscomparer)
+
+NOTE: Sometimes R.utils won't install properly depending on your machine and permissions, please make sure that it is installed on your machine, if you encounter any errors see the link for details.
 
 ### Input Specifications
 As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs and GWAS summary statistics to perform colocalization. Due to the lack of a consensus in the format of GWAS, eQTL, and pQTL data, we ask that the following information be included. For ease of use, please enter it in the `config.ini` file:

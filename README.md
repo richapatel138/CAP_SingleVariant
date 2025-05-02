@@ -36,7 +36,7 @@ The following R packages are automatically installed (if not already present) an
 - [`locuscomparer`](https://github.com/boxiangliu/locuscomparer)
 
 ### Input Specifications
-As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs and GWAS summary statistics to perform colocalization. Due to the lack of a consensus in the format of GWAS, eQTL, and pQTL data, we ask that the following information be included. For ease of use, please enter it in the [`config.ini`](#the-configini-file) file:
+As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs and GWAS summary statistics to perform colocalization. Due to the lack of a consensus in the format of GWAS, eQTL, and pQTL data, we ask that the following information be included. For ease of use, please enter it in the `config.ini` file:
 #### The `config.ini` File
 - `process`: Indicates the type of QTL data being used. Acceptable values are typically:
   - `eqtl`: expression Quantitative Trait Loci, denote in config file with "eqtl"
@@ -58,9 +58,9 @@ As mentioned, this pipeline accepts ARIC-formatted pQTLs or GTEx-formatted eQTLs
 #### Formatting genes of interest file: 
 In order to select regions of interest, the pipeline requires a list of genes to generate an SNP list from for either eQTL or pQTL data. The pipeline requires the user specify a directory containing a list of such identifiers/gene symbols.
 * **Using GTEx-formatted eQTLs**
-	* A `.txt` file with newline-separated data. The first line is a header indicating the column content. Each subsequent line contains the gene using its Ensembl Gene ID (e.g. ENSG00000227232, ENSG00000162591, etc.).
+	* A `.txt` file with newline-separated data. The first line is a header `genes` indicating the column content. Each subsequent line contains the gene using its Ensembl Gene ID (e.g. ENSG00000227232, ENSG00000162591, etc.). Please see test data for an example.
 * **Using ARIC-formatted pQTLs**
-	* A `.txt` file with newline-separated data. The first line is a header indicating the column content. Each subsequent line contains the gene using its gene symbol (e.g. LAYN, PTEN, TP53I3, etc.).
+	* A `.txt` file with newline-separated data. The first line is a header `genes` indicating the column content. Each subsequent line contains the gene using its gene symbol (e.g. LAYN, PTEN, TP53I3, etc.). Please see test data for an example.
 
 ### Singe Variant Colocalization Analysis Workflow 
 
@@ -85,7 +85,7 @@ In order to select regions of interest, the pipeline requires a list of genes to
   - Ensure consistent variant identifiers
 #### Step 6: Run Colocalization Analysis
 - Perform single variant colocalization analysis using the `coloc` package.
-- Save the results, including summary statistics and matching SNPs, as `.rds` and `.txt` files.
+- Save the dataset and results, including summary statistics and matching SNPs, as `.rds` and `.txt` files.
 #### Step 7: Generate Locus Comparison Plots
 - Create and save comparison plots using `locuscomparer`:
   - Visualize p-value concordance between GWAS and QTL signals at each locus

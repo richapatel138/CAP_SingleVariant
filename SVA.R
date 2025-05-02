@@ -1,4 +1,4 @@
-# Install required packages if not already installed
+#install required packages if not already installed
 if (!require(data.table)) { install.packages("data.table") }
 if (!require(dplyr)) { install.packages("dplyr") }
 if (!require(coloc)) { install.packages("coloc") }
@@ -10,14 +10,14 @@ if (!require(httr)) { install.packages("httr") }
 if (!require(jsonlite)) { install.packages("jsonlite") }
 if (!require(RMySQL)) { install.packages("RMySQL") }
 
-# Install and load 'locuscomparer' from GitHub if not already installed
+#install and load 'locuscomparer' from GitHub if not already installed
 if (!require(locuscomparer)) {
   if (!require(devtools)) {
     install.packages("devtools")
   }
   devtools::install_github("boxiangliu/locuscomparer")
 }
-# Load libraries with suppressed messages
+#load libraries with suppressed messages
 suppressPackageStartupMessages(invisible(library(data.table)))
 suppressPackageStartupMessages(invisible(library(dplyr)))
 suppressPackageStartupMessages(invisible(library(coloc)))
@@ -30,10 +30,10 @@ suppressPackageStartupMessages(invisible(library(jsonlite)))
 suppressPackageStartupMessages(invisible(library(RMySQL)))
 suppressPackageStartupMessages(invisible(library(locuscomparer)))
 
-# Define a string concatenation operator
+#define a string concatenation operator
 `%&%` <- function(a, b) paste0(a, b)
 
-# Define command-line options
+#define command-line options
 option_list <- list(
   make_option("--process", type = "character", default = "pqtl", help = "If using eqtl data, add process flag, otherwise pqtl is the default."),
   make_option("--genes", type = "character", help = "List of genes of intrest, see READ.ME for specifications."),
@@ -52,13 +52,14 @@ option_list <- list(
 
 )
 
+#parse arguments
 opt <- parse_args(OptionParser(option_list=option_list))
 
 #gets working directory and the new dir the user wants to make for output
 parent_dir <- file.path(getwd(), opt$outputdir) 
 dir.create(parent_dir, showWarnings = FALSE, recursive = TRUE)  #create if it doesn't exist
 
-cat('Reading in genes')
+cat('Reading in genes\n')
 #read in the genes of intrest
 genes = fread(opt$genes)
 
@@ -163,30 +164,36 @@ if (opt$process == "eqtl") {
     #save matchsnp data for LD downstream   
     saveRDS(matchsnps, file = file.path(parent_dir, target_gene, paste0(target_gene, "_matchsnps")))
 
+    #run single variant coloc
     cat("SVA results for:", target_gene, "\n")
     my.res = coloc.abf(dataset1=gwascoloc, dataset2=eqtlcoloc)
-    
+
+    #write out the results from the SVA coloc
     write.table(my.res$summary, file = file.path(parent_dir, target_gene, paste0(target_gene, "_sva_summary.tsv")), sep = "\t", row.names = FALSE, quote = FALSE)
     write.table(my.res$results, file = file.path(parent_dir, target_gene, paste0(target_gene, "_sva_results.tsv")), sep = "\t", row.names = FALSE, quote = FALSE)
 
+    #make locus compare plots
     cat("Working on locuscompare results for:", target_gene, "\n")
+    #format matchsnps data into file to be used as GWAS data input
     gwas_out <- matchsnps %>%
       select(ID, P.y) %>%
       rename(rsid = ID, pval = P.y) %>%
       mutate(logp = -log10(pval))
 
+    #format matchsnps data into file to be used as qtl data input
     qtl_out <- matchsnps %>%
       select(ID, P.x) %>%
       rename(rsid = ID, pval = P.x) %>%
       mutate(logp = -log10(pval))
 
-    # Write to files
+    #write to files
     gwas_locus <- file.path(parent_dir, target_gene, paste0(target_gene, "_gwas_locuscompare.txt"))
     qtl_locus  <- file.path(parent_dir, target_gene, paste0(target_gene, "_qtl_locuscompare.txt"))
 
     write.table(gwas_out, file = gwas_locus, sep = "\t", row.names = FALSE, quote = FALSE)
     write.table(qtl_out,  file = qtl_locus,  sep = "\t", row.names = FALSE, quote = FALSE)
 
+    #plot and save it as a png
     plot_obj = locuscompare(in_fn1 = gwas_locus,
              in_fn2 = qtl_locus,
              title1 = paste0(target_gene, " GWAS"),
@@ -217,6 +224,7 @@ if (opt$process == "eqtl") {
       filter(entrezgenesymbol == target_gene) %>%
       pull(seqid_in_sample) #find the seqID which will be used to pull pqtl data
     
+    #if gene is not found, skip it
     if (length(protein) == 0) {
       cat("Skipping gene", target_gene, "as it is not found in seqID mapping\n")
       next
@@ -284,13 +292,16 @@ if (opt$process == "eqtl") {
     
     #save matchsnp data for LD downstream 
     saveRDS(matchsnps, file = file.path(parent_dir, target_gene, paste0(target_gene, "_matchsnps")))
-    
+
+    #run SVA coloc
     cat("SVA results for:", target_gene, "\n")
     my.res = coloc.abf(dataset1=gwascoloc, dataset2=pqtlcoloc)
     
+    #write out results
     write.table(my.res$summary, file = file.path(parent_dir, target_gene, paste0(target_gene, "_sva_summary.tsv")), sep = "\t", row.names = FALSE, quote = FALSE)
     write.table(my.res$results, file = file.path(parent_dir, target_gene, paste0(target_gene, "_sva_results.tsv")), sep = "\t", row.names = FALSE, quote = FALSE)
 
+    #same as above, use the matchsnps data to make the files for locus compare for gwas/qtl
     cat("Working on locuscompare results for:", target_gene, "\n")
     gwas_out <- matchsnps %>%
       select(ID, P.y) %>%
@@ -302,13 +313,14 @@ if (opt$process == "eqtl") {
       rename(rsid = ID, pval = P.x) %>%
       mutate(logp = -log10(pval))
 
-    # Write to files
+    #write to files
     gwas_locus <- file.path(parent_dir, target_gene, paste0(target_gene, "_gwas_locuscompare.txt"))
     qtl_locus  <- file.path(parent_dir, target_gene, paste0(target_gene, "_qtl_locuscompare.txt"))
 
     write.table(gwas_out, file = gwas_locus, sep = "\t", row.names = FALSE, quote = FALSE)
     write.table(qtl_out,  file = qtl_locus,  sep = "\t", row.names = FALSE, quote = FALSE)
 
+    #plot and save as png
     plot_obj = locuscompare(in_fn1 = gwas_locus,
              in_fn2 = qtl_locus,
              title1 = paste0(target_gene, " GWAS"),
